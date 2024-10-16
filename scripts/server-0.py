@@ -37,6 +37,8 @@ if __name__ == '__main__':
     req = requests.get(f'http://localhost:{PORT}/hehehe')
     assert(req.status_code == 404)
 
-    req = requests.post(f'http://localhost:{PORT}/hehehe')
+    req = requests.post(f'http://localhost:{PORT}/heh/')
     assert(req.status_code == 404)
 
+    req = requests.post(f'http://localhost:{PORT}//')
+    assert(req.status_code == 404)
