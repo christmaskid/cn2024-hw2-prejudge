@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo apt install dos2unix
 sudo apt update -y
 sudo apt install -y python-is-python3
 sudo apt install -y nodejs npm

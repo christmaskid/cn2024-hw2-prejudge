@@ -47,6 +47,7 @@ killall -9 node > /dev/null 2>&1
 killall -9 python > /dev/null 2>&1
 
 cd ${REPO_PATH}/hw2
+dos2unix web/*
 make clean
 
 echo "done."
