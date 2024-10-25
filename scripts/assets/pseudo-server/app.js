@@ -4,7 +4,6 @@ const multer = require('multer');
 const basicAuth = require('express-basic-auth');
 const fs = require('fs');
 const { exec } = require("child_process");
-
 var app = express();
 var port = 4500;
 
@@ -44,6 +43,23 @@ app.get('/api/file/:path*', function(req, res) {
     res.download(file);
 })
 
+app.get('/upload/file', basicAuth({
+        users: { 'demo' : '123' }, 
+        challenge: true,      
+        realm: 'b1234567'
+    }), function(req, res) {
+    res.send('200 ok')
+}                                                                                                                                                                                                   )
+  
+
+app.get('/upload/video', basicAuth({
+        users: { 'demo' : '123' }, 
+        challenge: true,      
+        realm: 'b1234567'
+    }), function(req, res) {
+    res.send('200 ok')
+}                                                                                                                                                                                                   )
+       
 app.post('/api/file', basicAuth({
         users: { 'demo': '123' },
         challenge: true,

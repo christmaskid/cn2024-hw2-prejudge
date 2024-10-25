@@ -17,13 +17,23 @@ def verify_password(username, password):
         return username
     
 @app.route('/', methods=['GET'])
-@auth.login_required
 def test():
     return "It works!"
 
 @app.route('/api/file/<path:filepath>', methods=['GET'])
 def download(filepath):
     return send_from_directory('files-flask', filepath)
+
+@app.route('/upload/file', methods=['GET'])
+@auth.login_required
+def uploadFile():
+    return "200 OK", 200
+
+@app.route('/upload/video', methods=['GET'])
+@auth.login_required
+def uploadVideo():
+    return "200 OK", 200
+
 
 @app.route('/api/file', methods=['POST'])
 @auth.login_required

@@ -12,7 +12,7 @@ def sendCMD(p, cmd, expect, timeout=TIMEOUT, expect_aliases=[]):
     print(f'send = {cmd}', end='')
     assert(recv.decode() == '> ')
 
-    recv = p.recvline()
+    recv = p.recvline(timeout=timeout)
     print(f' recv = {recv}')
     
     if recv.decode() != expect:
@@ -32,7 +32,16 @@ if __name__ == '__main__':
     delPath(f'{REPO}/hw2/files')
 
     pty = process.PTY
+    print('start')    
+    c = process(f'./client 127.0.0.1 {PORT} wrongAccount:123', shell=True, cwd=f'{REPO}/hw2', stdin=pty, stdout=pty) 
+    
+    recv = c.recvline()
+    print(recv.decode())
+    if recv.decode() != 'Invalid user or wrong password.\n':
+        assert(0)
     c = process(f'./client 127.0.0.1 {PORT} demo:123', shell=True, cwd=f'{REPO}/hw2', stdin=pty, stdout=pty) 
+    
+    # c = process(f'./client 127.0.0.1 {PORT} demo:123', shell=True, cwd=f'{REPO}/hw2', stdin=pty, stdout=pty) 
     # argv=['./hw2/client', '127.0.0.1', '8080', 'username:password']
     # r = process(argv=argv)
 
