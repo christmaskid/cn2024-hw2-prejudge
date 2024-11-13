@@ -141,7 +141,7 @@ if __name__ == '__main__':
     regex(req.content.decode(), 'assets/listv.rhtml')
     videoList = parseTable(req.content.decode())
     print(f"{videoList = }")
-    assert(videoList == {'beach': '/api/video/beach'})
+    assert(videoList == {'beach': '/video/beach'})
 
     # GET /upload/file
     req = requests.get(f'http://localhost:{PORT}/upload/file/')

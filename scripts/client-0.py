@@ -53,6 +53,7 @@ if __name__ == '__main__':
     sendCMD(c, 'put notexist', 'Command failed.\n', timeout=TIMEOUT)
 
     sendCMD(c, 'putv', 'Usage: putv [file]\n', timeout=TIMEOUT)
+    sendCMD(c, 'putv beach.mp4', 'Command succeeded.\n', timeout=TIMEOUT)
 
     sendCMD(c, 'get', 'Usage: get [file]\n', timeout=TIMEOUT)
     sendCMD(c, 'get server.bin', 'Command succeeded.\n', timeout=TIMEOUT)
