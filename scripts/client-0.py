@@ -38,7 +38,7 @@ if __name__ == '__main__':
     recv = c.recvline()
     print(recv.decode())
     if recv.decode() != 'Invalid user or wrong password.\n':
-        assert(0)*/
+        assert(0)
     # c = process(f'./client 127.0.0.1 {PORT} demo:123', shell=True, cwd=f'{REPO}/hw2', stdin=pty, stdout=pty) 
     # argv=['./hw2/client', '127.0.0.1', '8080', 'username:password']
     # r = process(argv=argv)
