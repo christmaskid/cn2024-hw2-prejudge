@@ -71,10 +71,21 @@ if __name__ == '__main__':
     genFile('assets/files/averylargefile', size='200M')
     genFile('assets/files/a STaRanG3 F1le', size='3K')
 
+    # GET /
     req = requests.get(f'http://localhost:{PORT}/')
     assert(req.status_code == 200)
     name, id = regex(req.content.decode(), 'assets/index.html')
     print(f"{name = } {id = }")
+
+    # POST /api/file
+    req = requests.get(f'http://localhost:{PORT}/api/file')
+    assert(req.status_code == 405)
+
+    req = requests.post(f'http://localhost:{PORT}/api/file', files=uploadFile('assets/files/afile'))
+    assert(req.status_code == 401)
+
+    req = requests.post(f'http://localhost:{PORT}/api/file', files=uploadFile('assets/files/afile'), auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
+    assert(req.status_code == 200)
 
     req = requests.post(f'http://localhost:{PORT}/api/file', files=uploadFile('assets/files/afile'))
     assert(req.status_code == 401)
@@ -108,17 +119,43 @@ if __name__ == '__main__':
     print(f"{fileList = }")
     assert(fileList == {'a STaRanG3 F1le': '/api/file/a%20STaRanG3%20F1le', 'afile': '/api/file/afile', 'alargerfile': '/api/file/alargerfile', 'averylargefile': '/api/file/averylargefile'})
 
+    # GET /api/file/{filename}
+    req = requests.get(f'http://localhost:{PORT}/api/file/a%20STaRanG3%20F1le')
+    assert(req.status_code == 200)
+    saveFile(req.content, 'assets/download/a STaRanG3 F1le')
+    cmpFile('assets/download/a STaRanG3 F1le', f'{REPO}/hw2/web/files/a STaRanG3 F1le')
+
+    # POST /api/video
+    req = requests.get(f'http://localhost:{PORT}/api/video')
+    assert(req.status_code == 405)
+
+    req = requests.post(f'http://localhost:{PORT}/api/video', files=uploadFile('assets/beach.mp4'))
+    assert(req.status_code == 401)
+
+    req = requests.post(f'http://localhost:{PORT}/api/video', files=uploadFile('assets/beach.mp4'), auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
+    assert(req.status_code == 200)
+
+    # GET /video/
     req = requests.get(f'http://localhost:{PORT}/video/')
     assert(req.status_code == 200)
     regex(req.content.decode(), 'assets/listv.rhtml')
     videoList = parseTable(req.content.decode())
     print(f"{videoList = }")
-    assert(videoList == {})
+    assert(videoList == {'beach': '/api/video/beach'})
 
-    req = requests.get(f'http://localhost:{PORT}/api/file/a%20STaRanG3%20F1le')
+    # GET /upload/file
+    req = requests.get(f'http://localhost:{PORT}/upload/file/')
+    assert(req.status_code == 401)
+    req = requests.get(f'http://localhost:{PORT}/upload/file/', auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
     assert(req.status_code == 200)
-    saveFile(req.content, 'assets/download/a STaRanG3 F1le')
-    cmpFile('assets/download/a STaRanG3 F1le', f'{REPO}/hw2/web/files/a STaRanG3 F1le')
+    regex(req.content.decode(), 'assets/uploadf.html')
+
+    # GET /upload/video
+    req = requests.get(f'http://localhost:{PORT}/upload/video/')
+    assert(req.status_code == 401)
+    req = requests.get(f'http://localhost:{PORT}/upload/video/', auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
+    assert(req.status_code == 200)
+    regex(req.content.decode(), 'assets/uploadv.html')
     
     delPath('assets/files')
     delPath('assets/download')
