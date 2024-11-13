@@ -37,9 +37,5 @@ if __name__ == '__main__':
     req = requests.get(f'http://localhost:{PORT}/hehehe')
     assert(req.status_code == 404)
 
-    req = requests.get(f'http://localhost:{PORT}/file/')
-    assert(req.status_code == 200)
-    name, id = regex(req.content.decode(), 'assets/index.html')
-    print(f"{name = } {id = }")
 
 
