@@ -145,6 +145,7 @@ if __name__ == '__main__':
 
     # GET /upload/file
     req = requests.get(f'http://localhost:{PORT}/upload/file/')
+    print("Get /upload/file:", req)
     assert(req.status_code == 401)
     req = requests.get(f'http://localhost:{PORT}/upload/file/', auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
     assert(req.status_code == 200)
