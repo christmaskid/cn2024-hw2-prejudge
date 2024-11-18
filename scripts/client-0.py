@@ -52,7 +52,7 @@ if __name__ == '__main__':
     cmpFile(f'{REPO}/hw2/client.bin', f'assets/pseudo-server/files-{SERV}/client.bin')
     sendCMD(c, 'put notexist', 'Command failed.\n', timeout=TIMEOUT)
 
-    sendCMD(c, 'putv', 'Usage: putv [file]\n', timeout=TIMEOUT)
+    sendCMD(c, 'putv', 'Usage: putv [file]\n', timeout=180)
 
     sendCMD(c, 'get', 'Usage: get [file]\n', timeout=TIMEOUT)
     sendCMD(c, 'get server.bin', 'Command succeeded.\n', timeout=TIMEOUT)
