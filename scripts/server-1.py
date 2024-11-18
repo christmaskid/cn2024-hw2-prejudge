@@ -144,17 +144,17 @@ if __name__ == '__main__':
     assert(videoList == {'beach': '/video/beach'})
 
     # GET /upload/file
-    req = requests.get(f'http://localhost:{PORT}/upload/file/')
+    req = requests.get(f'http://localhost:{PORT}/upload/file')
     print("Get /upload/file:", req)
     assert(req.status_code == 401)
-    req = requests.get(f'http://localhost:{PORT}/upload/file/', auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
+    req = requests.get(f'http://localhost:{PORT}/upload/file', auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
     assert(req.status_code == 200)
     regex(req.content.decode(), 'assets/uploadf.html')
 
     # GET /upload/video
-    req = requests.get(f'http://localhost:{PORT}/upload/video/')
+    req = requests.get(f'http://localhost:{PORT}/upload/video')
     assert(req.status_code == 401)
-    req = requests.get(f'http://localhost:{PORT}/upload/video/', auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
+    req = requests.get(f'http://localhost:{PORT}/upload/video', auth=requests.auth.HTTPBasicAuth('m4JorTOM', 'SpAcEoDD1TY'))
     assert(req.status_code == 200)
     regex(req.content.decode(), 'assets/uploadv.html')
     
